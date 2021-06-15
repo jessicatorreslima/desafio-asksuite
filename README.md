@@ -17,20 +17,25 @@ The necessary information for the crawler is under the [Assets](#assets) session
 ## What you'll need to do:
 * Create a POST endpoint "/search"
     * The expected payload is:
+    
         <pre>
         {
             "checkin": "YYYY-MM-DD", // Check-in date
             "checkout": "YYYY-MM-DD" // Check-out date
         }
         </pre>
+        
        Example
+       
         <pre>
         {
             "checkin": "2021-07-01", 
             "checkout": "2021-07-03"
         }
         </pre>
+        
     * The expected result is an array of rooms:
+    
         <pre>
         [{
             "name": string, // Room name
@@ -39,7 +44,9 @@ The necessary information for the crawler is under the [Assets](#assets) session
             "image": string, // Room main photo
         }]
         </pre>
+        
         Example
+        
         <pre>
         [{
             "name": "Standard Room",
