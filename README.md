@@ -49,16 +49,16 @@ The necessary information for the crawler is under the [Assets](#assets) session
         
         <pre>
         [{
-            "name": "Standard Room",
-            "description": "Ideal for relaxing. The rooms...", 
-            "price": "R$ 715,00",
-            "image": "https://myreservations.omnibees.com/Handlers/ImageLoader.ashx?sz=250x166&imageID=189952.jpg",
+            "name": "STUDIO CASAL",
+            "description": "Apartamentos localizados no prédio principal do Resort, próximos a recepção e a área de convivência, com vista para área de estacionamento não possuem varanda. Acomoda até 1 adulto e 1 criança ou 2 adultos", 
+            "price": "R$ 1.092,00",
+            "image": "https://letsimage.s3.amazonaws.com/letsbook/193/quartos/30/fotoprincipal.jpg"
         },
         {
-            "name": "Master",
-            "description": "There are 6 luxurious rooms...", 
-            "price": "R$ 1.115,30",
-            "image": "https://myreservations.omnibees.com/Handlers/ImageLoader.ashx?sz=250x166&imageID=192355.jpg",
+            "name": "CABANA",
+            "description": "Apartamentos espalhados pelos jardins do Resort, com vista jardim possuem varanda. Acomoda até 4 adultos ou 3 adultos e 1 criança ou 2 adultos e 2 criança ou 1 adulto e 3 crianças, em duas camas casal.", 
+            "price": "R$ 1.321,00",
+            "image": "https://letsimage.s3.amazonaws.com/letsbook/193/quartos/32/fotoprincipal.jpg"
         }]
         </pre>
         
@@ -84,7 +84,7 @@ Default port is set to `8080`
 
 ## Assets
 * Crawl URL sample (change dates): 
-<pre>https://book.omnibees.com/hotelresults?CheckIn=23092021&CheckOut=24092021&Code=AMIGODODANIEL&NRooms=1&_askSI=d34b1c89-78d2-45f3-81ac-4af2c3edb220&ad=2&ag=-&c=2983&ch=0&diff=false&group_code=&lang=pt-BR&loyality_card=&utm_source=asksuite&q=5462#show-more-hotel-button</pre>
+<pre>https://pratagy.letsbook.com.br/D/Reserva?checkin=21%2F06%2F2022&checkout=25%2F06%2F2022&cidade=&hotel=12&adultos=2&criancas=&destino=Pratagy+Beach+Resort+All+Inclusive&promocode=&tarifa=&mesCalendario=6%2F14%2F2022</pre>
 * Help images:
 ![sample_1](assets/sample_1.png)
 
