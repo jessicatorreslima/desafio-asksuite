@@ -37,7 +37,10 @@ class RoomService {
         const browser = await BrowserService.getBrowser();
         try {
             const page = await browser.newPage();
-            await page.goto(url);
+            await page.goto(url, { waitUntil: 'networkidle0' });
+
+            // Takes a screenshot from de source page
+            await this.takeFullPageScreenshot(page, 'assets/sourcepage.png');
 
             // Checks for unavailability errors
             const unavailability = await this.getUnavailability(page);
@@ -87,6 +90,21 @@ class RoomService {
             return text;
         }
     }
+
+    /**
+     * Takes a full page screenshot of a given page using Puppeteer.
+     * @param {Page} page - The Puppeteer page object.
+     * @param {string} filePath - The file path where the screenshot will be saved.
+     * @returns {Promise<void>} - A Promise that resolves when the screenshot is taken.
+     */
+    static async takeFullPageScreenshot(page, filePath) {
+        const screenshotOptions = {
+            path: filePath,
+            fullPage: true,
+        };
+        await page.screenshot(screenshotOptions);
+    }
+
 }
 
 module.exports = RoomService;
