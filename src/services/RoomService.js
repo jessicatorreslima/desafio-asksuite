@@ -38,12 +38,14 @@ class RoomService {
         try {
             const page = await browser.newPage();
             await page.goto(url);
+
             // Checks for unavailability errors
             const unavailability = await this.getUnavailability(page);
             if (unavailability) {
                 return ({ error: unavailability });
             }
 
+            // Extract available rooms information
             const rooms = await this.extractRooms(page);
             return rooms;
         } finally {
