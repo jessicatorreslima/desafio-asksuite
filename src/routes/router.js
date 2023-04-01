@@ -25,14 +25,25 @@ router.post("/search", async (req, res) => {
 });
 
 function validateParams(checkin, checkout) {
-    const errors = [];
-    if (!checkin) {
-        errors.push("Check-in date is required");
+    const errors = {};
+
+    function validateDate(date, fieldName) {
+        if (!date) {
+            errors[fieldName] = `${fieldName} date is required`;
+        } else if (!isValidDate(date)) {
+            errors[fieldName] = `${fieldName} date must be in 'yyyy-mm-dd' format`;
+        }
     }
-    if (!checkout) {
-        errors.push("Checkout date is required");
-    }
-    return errors;
+
+    validateDate(checkin, 'Check-in');
+    validateDate(checkout, 'Checkout');
+
+    return Object.values(errors);
+}
+
+function isValidDate(dateString) {
+    let pattern = /^\d{4}-\d{2}-\d{2}$/;
+    return pattern.test(dateString);
 }
 
 module.exports = router;
