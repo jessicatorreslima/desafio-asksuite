@@ -1,102 +1,82 @@
-# Test Dev Asksuite
+# Hotel Rooms Search API
 
-Hey! Glad you're here.
-I'm going to explain exactly what you'll have to implement in this test and what we expect as outcome.
+## About
 
-First of all, we have this nice express.js boilerplate project to assist you so you don't have to create everything from scratch.
+This API scrapes the website https://pratagy.letsbook.com.br/D/Reserva to search for prices of each room available during the check-in/check-out period provided in the POST request body.
 
-## Briefing
-The traveller comes to our bot and asks for "Price quotation". Then the bot asks for the dates the traveller wants to 
-stay at the bot's hotel.
-At the moment the traveller fills the requested information the bot needs to search the prices for each room available in the check-in/check-out 
-timeframe.
+* The default hotel used by the API is "PRATAGY BEACH RESORT ALL INCLUSIVE".
+* The API searches for rooms for 2 adults by default.
 
-You will have to implement the API responsible for doing the searching part.
-The necessary information for the crawler is under the [Assets](#assets) session
+## Technologies
+* Node v18.15.0  
 
-## What you'll need to do:
-* Create a POST endpoint "/search"
-    * The expected payload is:
-    
-        <pre>
-        {
-            "checkin": "YYYY-MM-DD", // Check-in date
-            "checkout": "YYYY-MM-DD" // Check-out date
-        }
-        </pre>
-        
-       Example
-       
-        <pre>
-        {
-            "checkin": "2021-07-01", 
-            "checkout": "2021-07-03"
-        }
-        </pre>
-        
-    * The expected result is an array of rooms:
-    
-        <pre>
-        [{
-            "name": string, // Room name
-            "description": string,  // Room description
-            "price": string, // Room daily price
-            "image": string, // Room main photo
-        }]
-        </pre>
-        
-        Example
-        
-        <pre>
-        [{
-            "name": "STUDIO CASAL",
-            "description": "Apartamentos localizados no prédio principal do Resort, próximos a recepção e a área de convivência, com vista para área de estacionamento não possuem varanda. Acomoda até 1 adulto e 1 criança ou 2 adultos", 
-            "price": "R$ 1.092,00",
-            "image": "https://letsimage.s3.amazonaws.com/letsbook/193/quartos/30/fotoprincipal.jpg"
-        },
-        {
-            "name": "CABANA",
-            "description": "Apartamentos espalhados pelos jardins do Resort, com vista jardim possuem varanda. Acomoda até 4 adultos ou 3 adultos e 1 criança ou 2 adultos e 2 criança ou 1 adulto e 3 crianças, em duas camas casal.", 
-            "price": "R$ 1.321,00",
-            "image": "https://letsimage.s3.amazonaws.com/letsbook/193/quartos/32/fotoprincipal.jpg"
-        }]
-        </pre>
-        
-To achieve this result you may:
+Dependencies: `express` `puppeteer` `dotenv`
 
-* With puppeteer, go to the [given URL](#assets)
-* Retrieve the needed information to assemble the payload using web crawling methods
+## Setup
 
-## Environment
-* Node 10+
-* Dotenv setup
+Before getting started, make sure that you have Node.js installed on your system. You can download it from the official website: https://nodejs.org/en/.
 
-Already installed: `express` `puppeteer` `dotenv`
+1. Clone the repository and move into the folder:
+```
+git clone https://github.com/jessicatorreslima/desafio-asksuit.git
+```
+```
+cd desafio-asksuit
+```
 
-**_Feel free to add any lib you find relevant to your test._**
+2. Install dependencies:
+```
+npm install
+```
 
+3. Start the server:
+```
+npm start
+```
 
-## Running
-* Install dependencies with: `npm install`
-* Run as dev: `npm run dev`
+## Consuming the API
 
-Default port is set to `8080`
+### Request
+The default port is 8080.  
+Send a POST request to the URL: http://localhost:8080/search with a JSON body as shown in the example below:
 
-## Assets
-* Crawl URL sample (change dates): 
-<pre>https://pratagy.letsbook.com.br/D/Reserva?checkin=21%2F06%2F2022&checkout=25%2F06%2F2022&cidade=&hotel=12&adultos=2&criancas=&destino=Pratagy+Beach+Resort+All+Inclusive&promocode=&tarifa=&mesCalendario=6%2F14%2F2022</pre>
-* Help images:
-![sample_1](assets/sample_1.png)
+```JSON
+{
+    "checkin": "2021-07-01", 
+    "checkout": "2021-07-05"
+}
+```
+Dates <b>must</b> use the format: "YYYY-MM-DD"
 
-## Test rating
-What do we evaluate with this test?
+### Response
 
-* Dev's capacity of:
-    * Self-learning
-    * Working with node
-    * Understanding an existent project
-* Dev's code quality:
-    * Clear and maintainable code
-    * Coding structure
-    * Changes that don't break easily
+The API returns an HTTP status code of 200 for successful requests and a JSON array with all rooms found, as shown in the example below:
 
+```JSON
+[
+    {
+        "name": "Studio Casal",
+        "description": "No prédio principal do Resort, sem varanda e próximo à recepção. Dispõe de uma cama de casal e uma cama de solteiro. Acomoda até 2 pessoas. Sem cama extra. Inclui ingressos do Pratagy Acqua Park*. All inclusive com serviço de buffet.",
+        "price": "R$  1.533,00",
+        "image": "https://letsimage.s3.amazonaws.com/letsbook/193/quartos/30/fotoprincipal.jpg"
+    },
+    {
+        "name": "Studio Familia",
+        "description": "No prédio principal do Resort, com varanda e vista para os jardins. Dispõe de uma cama de casal e uma cama de solteiro. Acomoda até 3 pessoas, nas opções de 1 adulto e 2 crianças (free até 12 anos) ou 2 adultos e 1 criança (free até 12 anos) ou 3 adultos. Sem cama extra. Inclui ingressos do Pratagy Acqua Park*. All inclusive com serviço de buffet.",
+        "price": "R$  1.686,00",
+        "image": "https://letsimage.s3.amazonaws.com/letsbook/193/quartos/31/fotoprincipal.jpg"
+    }
+]
+```  
+
+If the API cannot find any room available in the check-in/check-out period provided, it will return the message the website provides, as shown in the example below:
+
+```JSON
+{
+    "error": "Desculpe, mas não temos quartos disponíveis para esta data. Que tal tentar uma nova busca para um período diferente?"
+}
+```
+
+<b>Note:</b> The API returns an HTTP status code of 400 for invalid requests.
+
+<b>Note:</b> The website used by this API is not owned or maintained by the creator of this API. The creator of this API does not take responsibility for any changes or inconsistencies in the website that may cause this API to not work properly.
