@@ -69,7 +69,7 @@ The API returns an HTTP status code of 200 for successful requests and a JSON ar
 ]
 ```  
 
-If the API cannot find any room available in the check-in/check-out period provided, it will return the message the website provides, as shown in the example below:
+If the API is unable to find any available rooms for the provided check-in/check-out period, it will return an HTTP status code of 400 along with an error message provided by the website, as shown in the example below:
 
 ```JSON
 {

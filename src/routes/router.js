@@ -17,10 +17,9 @@ router.post("/search", async (req, res) => {
 
     try {
         const rooms = await RoomService.getRooms(checkin, checkout);
-        return res.json(rooms);
+        res.status(200).json(rooms);
     } catch (error) {
-        console.error(error);
-        return res.status(500).send("Failed to fetch rooms. Please try again later.");
+        res.status(error.status || 500).json({ error: error.message });
     }
 });
 

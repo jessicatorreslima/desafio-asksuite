@@ -49,7 +49,7 @@ class RoomService {
             // Checks for unavailability errors
             const unavailability = await this.getUnavailability(page);
             if (unavailability) {
-                return { error: unavailability };
+                throw { message: unavailability, status: 400 };
             }
 
             // Extract available rooms information
