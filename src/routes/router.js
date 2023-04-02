@@ -24,6 +24,11 @@ router.post("/search", async (req, res) => {
     }
 });
 
+router.all("**", (req, res) => {
+    res.status(403);
+    res.send("Not alowed!");
+});
+
 function validateParams(checkin, checkout) {
     const errors = {};
 
