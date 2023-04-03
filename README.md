@@ -18,7 +18,7 @@ Before getting started, make sure that you have Node.js installed on your system
 
 1. Clone the repository and move into the folder:
 ```
-git clone https://github.com/jessicatorreslima/desafio-asksuit.git
+git clone https://github.com/jessicatorreslima/desafio-asksuite.git
 ```
 ```
 cd desafio-asksuit
