@@ -77,6 +77,6 @@ If the API is unable to find any available rooms for the provided check-in/check
 }
 ```
 
-<b>Note:</b> The API returns an HTTP status code of 400 for invalid requests.
+<b>Note:</b> The API returns an HTTP status code of 500 for invalid requests.
 
 <b>Note:</b> The website used by this API is not owned or maintained by the creator of this API. The creator of this API does not take responsibility for any changes or inconsistencies in the website that may cause this API to not work properly.
