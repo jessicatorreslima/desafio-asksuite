@@ -21,7 +21,7 @@ Before getting started, make sure that you have Node.js installed on your system
 git clone https://github.com/jessicatorreslima/desafio-asksuite.git
 ```
 ```
-cd desafio-asksuit
+cd desafio-asksuite
 ```
 
 2. Install dependencies:
